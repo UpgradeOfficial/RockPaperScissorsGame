@@ -29,9 +29,10 @@ const checkResult = (value1, value2) => {
   }
   return 0;
 };
+const allowedFrontendHost=process.env.ALLOWED_FRONTEND_HOST
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: allowedFrontendHost,
   },
 });
 
@@ -79,5 +80,5 @@ app.get("/", (req, res) => {
 });
 const PORT = process.env.PORT || 8000;
 server.listen(3001, () => {
-  console.log(`server is listening ${PORT}`);
+  console.log(`server is listening ${PORT} and front is on ${allowedFrontendHost}`);
 });

@@ -6,12 +6,10 @@ import scissors from "./images/icon-scissors.svg";
 import rock from "./images/icon-rock.svg";
 import paper from "./images/icon-paper.svg";
 
-const socket = io.connect("http://localhost:3001");
-console.log(socket)
+const allowedBackendHost = process.env.REACT_APP_ALLOWED_BACKEND_HOST;
 
+const socket = io.connect(allowedBackendHost);
 function App() {
-  
-
   const handleGameClick = (e) => {
     e.stopPropagation();
     const value = e.target.getAttribute("data-game-value");
@@ -23,13 +21,11 @@ function App() {
   useEffect(() => {
     socket.on("receive_message", (data) => {
       console.log("this is the message: ", data);
-     
     });
     socket.on("receive_error", (data) => {
       alert(`Error message: ${data.message}`);
     });
   }, [socket]);
-
 
   return (
     <div className="App">
@@ -46,8 +42,13 @@ function App() {
           </div>
         </div>
         <div className="game-options">
-          <div onClick={(e) => handleGameClick(e)} className="paper" id="paper" data-game-value="paper">
-            <img src={paper} alt="paper-img"  data-game-value="paper" />
+          <div
+            onClick={(e) => handleGameClick(e)}
+            className="paper"
+            id="paper"
+            data-game-value="paper"
+          >
+            <img src={paper} alt="paper-img" data-game-value="paper" />
           </div>
           <div
             onClick={(e) => handleGameClick(e)}
@@ -55,10 +56,15 @@ function App() {
             id="scissors"
             data-game-value="scissors"
           >
-            <img src={scissors} alt="scissors-img" data-game-value="scissors"/>
+            <img src={scissors} alt="scissors-img" data-game-value="scissors" />
           </div>
-          <div onClick={(e) => handleGameClick(e)} className="rock" id="rock" data-game-value="rock">
-            <img src={rock} alt="rock-img"  data-game-value="rock"/>
+          <div
+            onClick={(e) => handleGameClick(e)}
+            className="rock"
+            id="rock"
+            data-game-value="rock"
+          >
+            <img src={rock} alt="rock-img" data-game-value="rock" />
           </div>
         </div>
       </div>
