@@ -1,14 +1,19 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css"
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
 import scissors from "./images/icon-scissors.svg";
 import rock from "./images/icon-rock.svg";
 import paper from "./images/icon-paper.svg";
+import {toast, ToastContainer} from "react-toastify";
 
 const allowedBackendHost = process.env.REACT_APP_ALLOWED_BACKEND_HOST;
 
+
 const socket = io.connect(allowedBackendHost);
 function App() {
+  const notify = () =>  toast.success("WOw so Easy")
+
   const handleGameClick = (e) => {
     e.stopPropagation();
     const value = e.target.getAttribute("data-game-value");
@@ -22,7 +27,7 @@ function App() {
       console.log("this is the message: ", data);
     });
     socket.on("receive_error", (data) => {
-      alert(`Error message: ${data.message}`);
+      toast.success(`Error message: ${data.message}`);
     });
   }, [socket]);
 
@@ -67,7 +72,7 @@ function App() {
           </div>
         </div>
       </div>
-      <button>RULES</button>
+      <button onClick={notify}>RULES</button>
       <div className="attribution">
         Challenge by
         <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">
@@ -75,6 +80,7 @@ function App() {
         </a>
         . Coded by <a href="#">Odeyemi Increase Ayobami</a>.
       </div>
+      <ToastContainer position="top-left"/>
     </div>
   );
 }
