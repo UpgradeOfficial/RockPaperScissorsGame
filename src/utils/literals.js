@@ -1,0 +1,1 @@
+export const allowedBackendHost = process.env.REACT_APP_ALLOWED_BACKEND_HOST;
