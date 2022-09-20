@@ -9,3 +9,11 @@ export const registerUser = async (user) => {
 
   return response;
 };
+export const forgotPassword = async (data) => {
+  const response = await axios.post(
+    `${allowedBackendHost}/forgot-password`,
+    data
+  );
+
+  return response;
+};

@@ -6,8 +6,12 @@ import App from "./App";
 import { AuthProvider } from "./contexts/AuthContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-
+import {disableReactDevTools} from "@fvilers/disable-react-devtools"
+import { node_env } from "./utils/literals";
 const queryClient = new QueryClient();
+
+if (node_env === "production") disableReactDevTools() 
+
 
 ReactDOM.render(
   <React.StrictMode>
