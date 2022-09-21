@@ -1,2 +1,2 @@
-export const allowedBackendHost = process.env.REACT_APP_ALLOWED_BACKEND_HOST || "https://rpcgame-api.onrender.com";
+export const allowedBackendHost = process.env.REACT_APP_ALLOWED_BACKEND_HOST || "https://rpcgame-api.cyclic.app/";
 export const node_env = process.env.NODE_DEV || process.env.REACT_APP_NODE_DEV || "local";
